@@ -22,3 +22,14 @@ for i in fail:
         print(i)
     nr+=1
 
+
+import datetime
+paev = datetime.datetime.now().day
+
+#Tahvli juurde
+fail = open("nimekiri.txt", encoding="utf-8")
+nr = 1
+for nimi in fail:
+    if nr == paev:
+        print(nimi, end="")
+    nr+=1
