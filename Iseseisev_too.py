@@ -33,18 +33,21 @@ for i in range(10):
 	nulli lisamisel ei tehta midagi
 	väljasta mõlemad loendit
 
-positiv = []
-negativ = []
-for i in range(5):
-    arv = int(input("Sisesta arv: "))
-    if arv > 0:
-        positiv.append(arv)
-    elif arv < 0:
-        negativ.append(arv)
-    if arv == 0:
-        print("Ära lisa nulli")
-print(f"Positiivsed: {positiv}")
-print(f"Negatiivsed: {negativ}")
+def pos_neg():
+    positiv = []
+    negativ = []
+    for i in range(5):
+        arv = int(input("Sisesta arv: "))
+        if arv > 0:
+            positiv.append(arv)
+        elif arv < 0:
+            negativ.append(arv)
+        if arv == 0:
+            print("Ära lisa nulli")
+    print(f"Positiivsed: {positiv}")
+    print(f"Negatiivsed: {negativ}")
+
+pos_neg()
 """
 
 """
@@ -53,19 +56,22 @@ print(f"Negatiivsed: {negativ}")
     The program should keep asking for new items until nothing is entered (no input followed by enter/return key).
     The program should then display the full shopping list.
 
-shopping_list = []
-while True:
-    toode = input("Sisesta toode: ")
-    if toode == "":
-        break
-    shopping_list.append(toode)
+def shopping():
+    shopping_list = []
+    while True:
+        toode = input("Sisesta toode: ")
+        if toode == "":
+            break
+        shopping_list.append(toode)
 
-if shopping_list:
-    print("Ostu korv:")
-    for toode in shopping_list:
-        print(toode)
-else:
-    print("Ostu korv on tühi.")
+    if shopping_list:
+        print("Ostu korv:")
+        for toode in shopping_list:
+            print(toode)
+    else:
+        print("Ostu korv on tühi.")
+
+shopping()
 """
 
 """
@@ -201,7 +207,7 @@ for kuu, (paev, temperatuur) in kuumim_paevad.items():
     Kasutaja lisab emaili kujul enimi.pnimi@server.com
 	Programm kontrollib kas email on sisestatud õigesti
 	Programm tükeldab selle ja väljastab lause: Tere enimi, sinu email on server serveris ja domeeniks on sul com
-"""
+
 def email():
     gmail = input("Sisesta email (kujul: enimi.pnimi@server.com): ")
     if "@" not in gmail:
@@ -209,3 +215,4 @@ def email():
     print("Tere", gmail.split("@")[0].split(".")[0], ", sinu email on", gmail.split("@")[1].split(".")[0], "serveris ja domeeniks on sul", gmail.split("@")[1].split(".")[1])
 
 email()
+"""
