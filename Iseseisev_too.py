@@ -121,16 +121,16 @@ emaili_kontroll()
 
 def salakeel():
     kas = input("Kas soovid salakeelt luua või tõlkida? (luua/tõlkida): ") # Küsib kasutajalt, kas ta soovib salakeelt luua või tõlkida
-    if kas == "luua":
+    if kas == "luua": # Kui kasutaja sisestas "luua", siis loob (pöörab ümber)
         sona = input("Sisesta sõna/tekst: ")[::-1]
         print(sona)
-    elif kas == "tõlkida":
+    elif kas == "tõlkida": # Kui kasutaja sisestas "tõlkida", siis tõlgib (pöörab ümber)
         sona = input("Sisesta sõna/tekst: ")[::-1]
         print(sona)
     else:
         print("Vale valik. Sisesta kas luua või tõlkida.")
 
-salakeel()
+salakeel() # Käivitab funktsiooni
 """
 
 """
