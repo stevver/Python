@@ -158,4 +158,54 @@ paaris_paaritu()
     Programm peab töötlema ühe aasta kõigi päevade temperatuure.
     Kirjutada programm, mis leiab kuude kaupa, mitmendal kuupäeval oli kõige soojem.
     Väljasta kuupäev ja vastav temperatuur. (Kui sama temperatuuriga oli mitu päeva, väljasta vähemalt üks)
+
+def kuude_temperatuur(temperatuurid):
+    kuumim_paevad = {}
+    
+    for kuu, paevad in temperatuurid.items():
+        kuumim_paev = None
+        kuumim_temperatuur = float('-inf')
+        
+        for paev, temperatuur in paevad.items():
+            if temperatuur > kuumim_temperatuur:
+                kuumim_paev = paev
+                kuumim_temperatuur = temperatuur
+        
+        kuumim_paevad[kuu] = (kuumim_paev, kuumim_temperatuur)
+    
+    return kuumim_paevad
+
+temperatuurid = {
+    'jaanuar': {1: -16, 2: -12, 3: -15, 4: -20, 5: 0, 6: -1, 7: -20, 8: -2, 9: -20, 10: -14, 11: -18, 12: -8, 13: 2, 14: -1, 15: -14, 16: -7, 17: -15, 18: -17, 19: -6, 20: -17, 21: -17, 22: -7, 23: 0, 24: 3, 25: -20, 26: -17, 27: -15, 28: -8, 29: -12, 30: 3},
+    'veebruar': {1: -9, 2: -2, 3: -7, 4: 1, 5: -16, 6: -19, 7: -19, 8: -11, 9: -16, 10: -15, 11: -9, 12: -2, 13: -16, 14: -4, 15: -20, 16: -5, 17: -6, 18: -17, 19: -5, 20: 0, 21: -16, 22: 2, 23: 0, 24: -20, 25: -16, 26: -2, 27: -18},
+    'märts': {1: 2, 2: -9, 3: -1, 4: -3, 5: -6, 6: -2, 7: 1, 8: -2, 9: -3, 10: -9, 11: -1, 12: -4, 13: 0, 14: -6, 15: -7, 16: 1, 17: 0, 18: 2, 19: -5, 20: -10, 21: 2, 22: -7, 23: -3, 24: 2, 25: -10, 26: 2, 27: -9, 28: -8, 29: -5, 30: -2},
+    'aprill': {1: -5, 2: 0, 3: 10, 4: -9, 5: 0, 6: -9, 7: -8, 8: 6, 9: -5, 10: 3, 11: -1, 12: 4, 13: 9, 14: -1, 15: 2, 16: 0, 17: 10, 18: 0, 19: 5, 20: 0, 21: -10, 22: 0, 23: 6, 24: 3, 25: -6, 26: -2, 27: -10, 28: -8, 29: -2},
+    'mai': {1: 12, 2: 5, 3: 8, 4: -1, 5: -2, 6: 4, 7: 10, 8: -1, 9: 7, 10: 15, 11: 7, 12: 3, 13: 6, 14: 4, 15: 10, 16: 9, 17: 13, 18: 6, 19: 14, 20: 10, 21: 14, 22: 2, 23: 6, 24: 12, 25: 15, 26: 2, 27: 14, 28: 11, 29: 9, 30: 1},
+    'juuni': {1: 12, 2: 5, 3: 17, 4: 6, 5: 10, 6: 14, 7: 9, 8: 7, 9: 15, 10: 23, 11: 29, 12: 11, 13: 16, 14: 18, 15: 9, 16: 25, 17: 14, 18: 8, 19: 16, 20: 22, 21: 19, 22: 22, 23: 23, 24: 18, 25: 16, 26: 16, 27: 26, 28: 24, 29: 22},
+    'juuli': {1: 15, 2: 8, 3: 21, 4: 28, 5: 18, 6: 13, 7: 9, 8: 9, 9: 8, 10: 6, 11: 8, 12: 12, 13: 12, 14: 29, 15: 28, 16: 20, 17: 6, 18: 9, 19: 12, 20: 8, 21: 14, 22: 18, 23: 14, 24: 13, 25: 23, 26: 6, 27: 24, 28: 24, 29: 17, 30: 20},
+    'august': {1: 7, 2: 6, 3: 5, 4: 19, 5: 18, 6: 18, 7: 17, 8: 20, 9: 15, 10: 11, 11: 7, 12: 10, 13: 13, 14: 12, 15: 20, 16: 11, 17: 10, 18: 14, 19: 18, 20: 14, 21: 24, 22: 6, 23: 17, 24: 16, 25: 6, 26: 17, 27: 5, 28: 13, 29: 11},
+    'september': {1: 21, 2: 19, 3: 21, 4: 9, 5: 13, 6: 18, 7: 6, 8: 6, 9: 20, 10: 7, 11: 25, 12: 13, 13: 8, 14: 9, 15: 14, 16: 16, 17: 19, 18: 10, 19: 7, 20: 25, 21: 7, 22: 17, 23: 16, 24: 15, 25: 17, 26: 18, 27: 15, 28: 9, 29: 19},
+    'oktoober': {1: 2, 2: 2, 3: 1, 4: 5, 6: -2, 7: 5, 8: 5, 9: 2, 10: 2, 11: 2, 12: 1, 13: -2, 14: 1, 15: -2, 16: 0, 17: -2, 18: 5, 19: 4, 20: 0, 21: 1, 22: -1, 23: 2, 24: 0, 25: 2, 26: 2, 27: 2, 28: -1, 29: 1, 30: 4, 31: -1},
+    'november': {1: -6, 2: -7, 3: -2, 4: -7, 5: -2, 6: -4, 7: 0, 8: -7, 9: -8, 10: -6, 11: 0, 12: -9, 13: -2, 14: -3, 15: -2, 16: 0, 17: -8, 18: -2, 19: -5, 20: -2, 21: -5, 22: -8, 23: -10, 24: 0, 25: -2, 26: -9, 27: -9, 28: -7, 29: -1},
+    'detsember': {1: -15, 2: 2, 3: -11, 4: -14, 5: -15, 6: -5, 7: -5, 8: -18, 9: -18, 10: -19, 11: 0, 12: 0, 13: 2, 14: -7, 15: -16, 16: -7, 17: -4, 18: -1, 19: -1, 20: -16, 21: -18, 22: -10, 23: -3, 24: -19, 25: -6, 26: -16, 27: -16, 28: -8, 29: -2, 30: -18},
+}
+
+kuumim_paevad = kuude_temperatuur(temperatuurid)
+
+for kuu, (paev, temperatuur) in kuumim_paevad.items():
+    print(f"Kuus {kuu} oli kõige kuumem {paev}. päeval, kus temperatuuriks oli {temperatuur} °C.")
 """
+
+"""
+17. Email
+    Kasutaja lisab emaili kujul enimi.pnimi@server.com
+	Programm kontrollib kas email on sisestatud õigesti
+	Programm tükeldab selle ja väljastab lause: Tere enimi, sinu email on server serveris ja domeeniks on sul com
+"""
+def email():
+    gmail = input("Sisesta email (kujul: enimi.pnimi@server.com): ")
+    if "@" not in gmail:
+        print("Valesti sisestatud email. @-märk puudu.")
+    print("Tere", gmail.split("@")[0].split(".")[0], ", sinu email on", gmail.split("@")[1].split(".")[0], "serveris ja domeeniks on sul", gmail.split("@")[1].split(".")[1])
+
+email()
