@@ -1,5 +1,1 @@
-Nimi,Asutus,E-posti aadress,Telefoni number,Esitluse pealkiri,Registreerimis-ID
-dhrh dgdfrfdb,dfdgdhn rgrfgr htrbf,fdbtf@dfbf.com,57784t767,vuyefhwhavbaew,5997958558
-bndfiujeonjri,hgeoiwvn vngweionv,hfwoibviowif@jfrh.ee,683476838,odfrnvjeufbwkbwkgnw,7326943566
-gjgf,gfgfj,gfjfg,jtygtgnn,dfgfdgfdbg,7222640268
-rwsheshg,ytjyter,loililöiol,jytjt,jyuuymkuy,8445212573
+Peeter Orusalu,HKHK,peeter@gmail.com,52095820,Test,9767462002

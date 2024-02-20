@@ -5,6 +5,8 @@
 from tkinter import *
 from tkinter import ttk
 import random
+from tkinter.ttk import Treeview
+from tkinter import END
 
 """
 Konverentsi registreerimissüsteem
@@ -29,7 +31,8 @@ Nõuded:
 #Aken
 aken = Tk()
 aken.title("Konverentsi registreerimissüsteem")
-aken.geometry("800x600")
+aken.geometry("1000x800")
+aken.state("zoomed")
 
 #Andmete sisestamine
 
@@ -67,9 +70,12 @@ esitluse_nimi = Entry(aken)
 esitluse_nimi.grid(row=5, column=1)
 
 def registreerimis_ID():
-    start = "0000000001"
-    end = "9999999999"
-    return random.randint(int(start), int(end))
+    used_numbers = set()
+    while True:
+        number = str(random.randint(0000000000, 9999999999))
+        if number not in used_numbers:
+            used_numbers.add(number)
+            return number
 
 def registreerimis_nupp():
     nimi = Nime_nimi.get()
@@ -86,27 +92,43 @@ def registreerimis_nupp():
     print("Nimi: " + full_name + "\nAsutus: " + asutus + "\nE-posti aadress: " + e_posti + "\nTelefoni number: " + telefoni + "\nEsitluse pealkiri: " + esitluse + "\nRegistreerimis-ID: " + str(registreerimis))
 
     with open("registreerimis_andmed.txt", "a") as fail:
-        if fail.tell() == 0:
-            fail.write("Nimi,Asutus,E-posti aadress,Telefoni number,Esitluse pealkiri,Registreerimis-ID\n")
         fail.write(f"{full_name},{asutus},{e_posti},{telefoni},{esitluse},{registreerimis}\n")
 
-reg_nupp = Button(aken, text="Registreeri", command=lambda: registreerimis_nupp())
+def kustuta_sisestus():
+    Nime_nimi.delete(0, END)
+    Asutus_nimi.delete(0, END)
+    e_posti_nimi.delete(0, END)
+    telefoni_nimi.delete(0, END)
+    esitluse_nimi.delete(0, END)
+
+reg_nupp = Button(aken, text="Registreeri", command=lambda: [registreerimis_nupp(), kustuta_sisestus()])
 reg_nupp.grid(row=6, column=0, columnspan=2)
 
 #Andmete kuvamine
 
-kuvamine = Label(aken, text="Registreeritud osalejad: ")
-kuvamine.grid(row=1, column=3, columnspan=2)
-
 def kuvamine():
-    with open("registreerimis_andmed.txt", "r") as fail:
-        andmed = fail.readlines()
-        for rida in andmed:
-            print(rida)
+    tree = Treeview(aken)
+    tree["columns"] = ("Nimi", "Asutus", "E-posti aadress", "Telefoni number", "Esitluse pealkiri", "Registreerimis-ID")
+    tree.heading("#0", text="", anchor="w")
+    tree.column("#0", width=0, stretch=NO)
+    tree.heading("Nimi", text="Nimi")
+    tree.heading("Asutus", text="Asutus")
+    tree.heading("E-posti aadress", text="E-posti aadress")
+    tree.heading("Telefoni number", text="Telefoni number")
+    tree.heading("Esitluse pealkiri", text="Esitluse pealkiri")
+    tree.heading("Registreerimis-ID", text="Registreerimis-ID")
+    with open("registreerimis_andmed.txt", "r") as file:
+        data = file.readlines()
+    for line in data:
+        values = line.strip().split(",")
+        tree.insert("", END, values=(values[0], values[1], values[2], values[3], values[4], values[5]))
+    tree.grid(row=1, column=2, rowspan=7, padx=30)
 
-kuv_nupp = Button(aken, text="Kuva osalejate andmed", command=lambda: kuvamine())
-kuv_nupp.grid(row=6, column=3, columnspan=2)
+kuvamine_nupp = Button(aken, text="Kuva registreerimisandmed", command=kuvamine)
+kuvamine_nupp.grid(row=7, column=0, columnspan=2)
 
+
+    
 
 
 aken.mainloop()
