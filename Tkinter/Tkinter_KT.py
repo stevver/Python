@@ -143,13 +143,28 @@ def otsimine():
     otsi_aken.geometry("1250x500")
 
     otsi_tekst = Label(otsi_aken, text="Sisesta osaleja registreerimis-ID või muu otsingusõna:")
-    otsi_tekst.grid(row=0, column=3, pady=7)
+    otsi_tekst.grid(row=0, column=0, pady=7, sticky="w")
 
-    otsi_sisestus = Entry(otsi_aken)
-    otsi_sisestus.grid(row=0, column=4, pady=7)
+    otsi_sisestus = Entry(otsi_aken, width=30)
+    otsi_sisestus.grid(row=0, column=1, pady=7, sticky="w")
+
+    
+    not_found_label = None
 
     def otsi_nupp():
+        nonlocal not_found_label
+
         otsi_sisestus_tekst = otsi_sisestus.get()
+
+        
+        for widget in otsi_aken.winfo_children():
+            if isinstance(widget, Treeview):
+                widget.destroy()
+        
+        if not_found_label:
+            not_found_label.destroy()
+            not_found_label = None
+
         with open("registreerimis_andmed.txt", "r") as fail:
             for line in fail:
                 if otsi_sisestus_tekst in line:
@@ -165,16 +180,16 @@ def otsimine():
                     kuv.heading("Registreerimis-ID", text="Registreerimis-ID")
                     values = line.strip().split(",")
                     kuv.insert("", END, values=(values[0], values[1], values[2], values[3], values[4], values[5]))
-                    kuv.grid(row=3, rowspan=2, columnspan=7, padx=25, pady=10)
-                    break
-            else:
-                otsi_tekst = Label(otsi_aken, text="Sellist osalejat ei leitud!")
-                otsi_tekst.grid(row=2, column=3, columnspan=2, pady=7)
+                    kuv.grid(row=3, column=0, columnspan=10, padx=25, pady=10)
+                    return  
 
-            
+            not_found_label = Label(otsi_aken, text="Sellist osalejat ei leitud!")
+            not_found_label.grid(row=2, column=1, columnspan=2, pady=7, sticky="w")
+
     otsi_nupp = Button(otsi_aken, text="Otsi", command=otsi_nupp)
-    otsi_nupp.grid(row=1, column=3, columnspan=2, pady=7)
+    otsi_nupp.grid(row=0, column=2, columnspan=1, padx=5, pady=7, sticky="w")
 
+otsi_nupp = Button(aken, text="Otsi osalejat", command=otsimine)
 otsi_nupp.grid(row=8, column=0, columnspan=2, pady=7)
 
 
